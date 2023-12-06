@@ -5,30 +5,9 @@ import authMiddleware from '../middlewares/auth.middle.js';
 const userRouter = Router();
 const userController = new UserController();
 
+/**
+ * 회원 상세 조회 API
+ */
 userRouter.get('/', authMiddleware, userController.getUser);
-// import express from 'express';
-// import User from '../models/user.js';
-// import SuccessResult from '../util/success/success.js';
-// import ErrorResult from '../util/error/error.js';
-
-// const userRouter = express.Router();
-
-// /**
-//  * 사용자 조회 API
-//  */
-// routeuserRouterr.get('/user', async (req, res) => {
-//     if (req.user === undefined || req.user === null) {
-//         return res.status(400).json(ErrorResult.errorAuthToken());
-//     }
-
-//     const selectUser = await User.findOne({
-//         attributes: ['user_name', 'user_email'],
-//         where: {
-//             id: req.user,
-//         },
-//     });
-
-//     res.status(200).json(SuccessResult.successUser(selectUser));
-// });
 
 export default userRouter;

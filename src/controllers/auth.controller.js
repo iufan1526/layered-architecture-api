@@ -26,7 +26,7 @@ export class AuthController {
         const { email, password } = req.body;
 
         const result = await this.authService.login(email, password);
-        console.log(result.token);
+
         if (result.success) {
             res.status(200).cookie('Authorization', `Bearer ${result.token}`).json(result);
         } else {

@@ -1,15 +1,39 @@
-// import express from 'express';
+import { Router } from 'express';
+import ProductController from '../controllers/product.controller.js';
+import authMiddle from '../middlewares/auth.middle.js';
 // import User from '../models/user.js';
 // import Product from '../models/product.js';
 // import SuccessResult from '../util/success/success.js';
 // import ErrorResult from '../util/error/error.js';
 // import { where } from 'sequelize';
 
-// const router = express.Router();
+const productRouter = Router();
+const productController = new ProductController();
+/**
+ * 상품 등록 API
+ */
+productRouter.post('/product', authMiddle, productController.createProduct);
 
-// /**
-//  * 상품 등록 API
-//  */
+/**
+ * 상품 수정 API
+ */
+productRouter.patch('/product/:productId', authMiddle, productController.updateProduct);
+
+/**
+ * 상품 삭제 API
+ */
+productRouter.delete('/product/:productId', authMiddle, productController.deleteProduct);
+
+/**
+ * 상품 목록 조회 API
+ */
+productRouter.get('/', productController.getProducts);
+
+/**
+ * 상품 상세 조회 API
+ */
+productRouter.get('/product/:productId', productController.getProduct);
+
 // router.post('/product', async (req, res) => {
 //     const { product_name, product_description, product_state } = req.body;
 
@@ -156,4 +180,4 @@
 //     res.status(200).json(SuccessResult.success(selectProduct, '상세조회를 성공하였습니다.'));
 // });
 
-// export default router;
+export default productRouter;
