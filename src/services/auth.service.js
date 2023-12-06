@@ -11,6 +11,9 @@ dotenv.config();
 export default class AuthService {
     authRepository = new AuthRepository();
 
+    /**
+     * 회원가입 API
+     */
     signup = async (email, password, passwordConfirm, name) => {
         if (!ValidatePassword.validatePasswordLength(password)) {
             return ErrorResult.errorPasswordLength();
@@ -31,6 +34,9 @@ export default class AuthService {
         return createdUser;
     };
 
+    /**
+     * 로그인 API
+     */
     login = async (email, password) => {
         const findUsers = await this.authRepository.findUsers(email);
 

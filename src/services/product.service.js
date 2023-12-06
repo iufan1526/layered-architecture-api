@@ -5,6 +5,9 @@ import SuccessResult from '../utils/success/success.js';
 export default class ProductService {
     productRepository = new ProductRepository();
 
+    /**
+     * 상품 등록 API
+     */
     createProduct = async (name, description, state, userId) => {
         if (!name || !description || !state || !userId) {
             return {
@@ -18,6 +21,9 @@ export default class ProductService {
         return SuccessResult.success(createdProduct, '상품등록이 완료되었습니다.');
     };
 
+    /**
+     * 상품 수정 API
+     */
     updateProduct = async (productId, name, description, state, userId) => {
         if (!productId && !name && !description && !state) {
             return {
@@ -37,6 +43,9 @@ export default class ProductService {
         return SuccessResult.success(updatedResult, '상품 수정이 완료되었습니다.');
     };
 
+    /**
+     * 상품 삭제 API
+     */
     deleteProduct = async (productId, userId) => {
         const findProduct = await this.productRepository.findProduct(productId, userId);
 
@@ -57,12 +66,18 @@ export default class ProductService {
         return SuccessResult.success(deletedResult, '상품 삭제가 성공하였습니다.');
     };
 
+    /**
+     * 상품 목록 조회 API
+     */
     getProducts = async () => {
         const getProducts = await this.productRepository.getProducts();
 
         return SuccessResult.success(getProducts, '상품 목록조희가 성공했습니다.');
     };
 
+    /**
+     * 상품 상세 조회 API
+     */
     getProduct = async productId => {
         const getProduct = await this.productRepository.getProduct(productId);
 
